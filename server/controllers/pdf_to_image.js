@@ -49,7 +49,7 @@ const pdfToImage = async (req, res) => {
 
       data.forEach(async (file) => {
         os.execCommand(
-          `python3 ../machine_learning/detect.py --weights ../machine_learning/runs/train/yolov5s_results/weights/best.pt --img 512 --conf 0.4 --source './${file.path}' --save-crop --project 'images' --name '${file.id}'`
+          `python3 machine_learning/detect.py --weights machine_learning/runs/train/yolov5s_results/weights/best.pt --img 512 --conf 0.4 --source './${file.path}' --save-crop --project 'images' --name '${file.id}'`
         )
           .then((result) => {
             finishedDetectFile += 1;
