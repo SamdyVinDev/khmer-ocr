@@ -1,0 +1,22 @@
+{
+    "WELCOME": "Welcome",
+    "SEARCH_FOR_PDF_TOOLS": "Search for PDF tools",
+    "DOCUMENT_LINE_CROPPING": "Document Line Cropping",
+    "PDF_TO_IMAGE_CONVERTER": "PDF to image converter",
+    "CONVERT_TO_WORD": "Convert to Word",
+    "CONVERTING": "Converting",
+    "CONVERT": "Convert",
+    "CONVERTED_SUCCESSFULLY": "Converted Successfully",
+    "REMOVE": "Remove",
+    "REMOVE_ALL": "Remove All",
+    "CHOOSE_FILES": "Choose Files",
+    "DRAG_AND_DROP_YOUR_FILES_HERE": "Drap and drop your files here",
+    "OR": "or",
+    "CONVERT_OTHER_FILES": "Convert Other Files",
+    "NAME": "Name",
+    "TYPE": "Type",
+    "SIZE": "Size",
+    "PREVIEW": "Preview",
+    "MENU": "Menu",
+    "BACK": "Back"
+}

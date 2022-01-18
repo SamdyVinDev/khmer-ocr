@@ -1,13 +1,12 @@
 {
-  "name": "internship1-khmer-ocr",
+  "name": "khmer-ocr",
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
+  "workspaces": [
+    "*"
+  ],
   "scripts": {
-    "start": "cd server && yarn && node index.js",
-    "dev": "cd server && yarn && nodemon index.js",
-    "setup:req": "pip install -r requirements.txt",
-    "setup:env": "python -m venv env && source env/bin/activate",
-    "setup:all": "yarn setup:env && yarn setup:req"
+    "start": "forever server/index.js && cd client && yarn start -p 80"
   }
 }

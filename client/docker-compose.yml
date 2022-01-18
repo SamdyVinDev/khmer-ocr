@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+    frontend:
+        container_name: khmer_ocr_frontend
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ".:/app"
+            - "/app/node_modules"
+        ports:
+            - 80:3000

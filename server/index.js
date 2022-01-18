@@ -25,6 +25,6 @@ app.post("/api/v1/pdf-to-image", pdfToImage);
 app.post("/api/v1/pdf-to-word", pdfToWord);
 app.post("/api/v1/crop-pdf", cropPdf);
 
-const port = process.env.PORT || 8000;
+const port = 8000;
 
-app.listen(port, () => console.log(`App is listening on port ${port}.`));
+app.listen(port, () => console.log(`Server is listening on port ${port}.`));

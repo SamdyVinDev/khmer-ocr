@@ -1,0 +1,22 @@
+{
+    "WELCOME": "សួស្តី",
+    "SEARCH_FOR_PDF_TOOLS": "ស្វែងរកឧបករណ៍ PDF",
+    "DOCUMENT_LINE_CROPPING": "ច្រឹបបន្ទាត់ក្នុងឯកសារ",
+    "PDF_TO_IMAGE_CONVERTER": "បម្លែងឯកសារទៅជារូបភាព",
+    "CONVERT_TO_WORD": "បម្លែងឯកសារទៅជា Word",
+    "CONVERTING": "កំពុងបំលែង",
+    "CONVERT": "បម្លែង",
+    "CONVERTED_SUCCESSFULLY": "ឯកសារត្រូវបានបំប្លែងដោយជោគជ័យ",
+    "REMOVE": "ដកចេញ",
+    "REMOVE_ALL": "ដកចេញទាំងអស់",
+    "CHOOSE_FILES": "ជ្រើសរើស​ឯកសារ",
+    "DRAG_AND_DROP_YOUR_FILES_HERE": "អូស និងទម្លាក់ឯកសាររបស់អ្នកនៅទីនេះ",
+    "OR": "ឬ",
+    "CONVERT_OTHER_FILES": "បម្លែងឯកសារផ្សេងទៀត",
+    "NAME": "ឈ្មោះ",
+    "TYPE": "ប្រភេទ",
+    "SIZE": "ទំហំ",
+    "PREVIEW": "មើលជាមុន",
+    "MENU": "ម៉ឺនុយ",
+    "BACK": "ត្រឡប់ក្រោយ"
+}

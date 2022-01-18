@@ -1,0 +1,22 @@
+{
+    "WELCOME": "欢迎",
+    "SEARCH_FOR_PDF_TOOLS": "搜索 PDF 工具",
+    "DOCUMENT_LINE_CROPPING": "文档线裁剪",
+    "PDF_TO_IMAGE_CONVERTER": "将文件转换为图像",
+    "CONVERT_TO_WORD": "将文档转换为 Word",
+    "CONVERTING": "转换",
+    "CONVERT": "兑换",
+    "CONVERTED_SUCCESSFULLY": "文件转换成功",
+    "REMOVE": "消除",
+    "REMOVE_ALL": "移除所有",
+    "CHOOSE_FILES": "选择文件",
+    "DRAG_AND_DROP_YOUR_FILES_HERE": "将您的文件拖放到此处",
+    "OR": "或者",
+    "CONVERT_OTHER_FILES": "转换其他文件",
+    "NAME": "名称",
+    "TYPE": "类别",
+    "SIZE": "尺寸",
+    "PREVIEW": "预览",
+    "MENU": "菜单",
+    "BACK": "背部"
+}

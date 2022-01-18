@@ -1,0 +1,5 @@
+# For Node Exoress Server
+/node_modules
+temp
+/images/*
+/uploads/*

@@ -1,0 +1,16 @@
+# npm
+node_modules
+# next.js build files
+.next
+# environment variables
+.env
+.env.*
+!.env.example
+
+# PWA Files
+**/public/sw.js
+**/public/workbox-*.js
+**/public/workbox-*.js.map
+**/public/worker-*.js
+**/public/worker-*.js.map
+**/public/sw.js.map

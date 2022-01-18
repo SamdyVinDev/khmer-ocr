@@ -1,0 +1,14 @@
+version: "3"
+services:
+  app:
+    container_name: khmer_ocr
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./client:/app/client"
+      - "./server:/app/server"
+      - "./machine_learning:/app/machine_learning"
+    ports:
+      - 8000:8000
+      - 80:80

@@ -26,7 +26,7 @@ const pdfToWord = async (req, res) => {
             id: uuid.v4(),
             name: rename,
             type: fileType,
-            url: `uploads/${rename}`,
+            path: `uploads/${rename}`,
           });
         });
       } else {
@@ -41,7 +41,7 @@ const pdfToWord = async (req, res) => {
           id: uuid.v4(),
           name: rename,
           type: fileType,
-          url: `uploads/${rename}`,
+          path: `uploads/${rename}`,
         });
       }
 
@@ -49,7 +49,7 @@ const pdfToWord = async (req, res) => {
 
       data.forEach(async (file) => {
         os.execCommand(
-          `python ../detect.py --weights ../runs/train/yolov5s_results/weights/best.pt --img 512 --conf 0.4 --source './${file.url}' --save-crop --project 'images' --name '${file.id}'`
+          `python3 ../machine_learning/detect.py --weights ../machine_learning/runs/train/yolov5s_results/weights/best.pt --img 512 --conf 0.4 --source './${file.path}' --save-crop --project 'images' --name '${file.id}'`
         )
           .then((result) => {
             finishedDetectFile += 1;
