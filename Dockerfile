@@ -17,9 +17,6 @@ ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Install OpenCV
-RUN apt -y install python3-opencv
-
 # Install All Machine Learning Dependencies
 RUN pip install -U pip
 RUN pip install matplotlib>=3.2.2
@@ -33,6 +30,10 @@ RUN pip install tensorboard>=2.4.1
 RUN pip install pandas>=1.1.4
 RUN pip install seaborn>=0.11.0
 RUN pip install thop
+RUN pip install opencv-python
+RUN pip install opencv-contrib-python
+RUN pip install opencv-python-headless
+RUN pip install opencv-contrib-python-headless
 RUN pip install torch==1.8.2+cpu torchvision==0.9.2+cpu torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
 
 # Setup server
