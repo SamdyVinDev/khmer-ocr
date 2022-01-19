@@ -8,36 +8,82 @@ import FileUploadPreviewCard from "@components/customs/PreviewCard";
 import UploadMultipleFiles from "@components/UploadMultipleFiles";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import axios, { AxiosRequestConfig } from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useSettings } from "src/contexts/SettingsContext";
+import endpoints, { apiUrl } from "src/utils/endpoints";
 import { v4 as uuid } from "uuid";
 
-export default function splitPdf() {
+export default function pdfToWord() {
     const { t } = useSettings();
     const [files, setFiles] = useState<any[]>([]);
     const [uploadProgress, setUploadProgress] = useState<any>(0);
     const [uploadStarted, setUploadStarted] = useState(false);
     const [uploadCompleted, setUploadCompleted] = useState(false);
 
-    useEffect(() => {
-        if (uploadProgress >= 100) {
-            const notifySound = new Audio("sounds/notify.mp3");
-            notifySound.play();
-            toast.success(t("CONVERTED_SUCCESSFULLY"));
-            setFiles([]);
-            setUploadCompleted(true);
-            setUploadStarted(false);
-        }
-    }, [uploadProgress]);
+    const onConvertComplete = () => {
+        const notifySound = new Audio("sounds/notify.mp3");
+        notifySound.play();
+        toast.success(t("CONVERTED_SUCCESSFULLY"));
+        setFiles([]);
+        setUploadCompleted(true);
+        setUploadStarted(false);
+    };
 
-    const convertFilesHandler = () => {
-        console.log("Start Converting...");
-        setUploadStarted(true);
-        Array.from(Array(100)).forEach((_, i) => {
-            setTimeout(() => setUploadProgress(i + 1), i * 100);
-        });
+    const convertFilesHandler = async () => {
+        try {
+            console.log("Start Converting...");
+            setUploadStarted(true);
+            const body: FormData = new FormData();
+
+            files.forEach((file) => {
+                body.append("files", file.data);
+            });
+
+            setUploadProgress(10);
+            const config: AxiosRequestConfig = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Accept: "*/*",
+                    "Accept-Encoding": "gzip, deflate, br",
+                },
+            };
+
+            Array.from(Array(98)).forEach((_, i) => {
+                if (i + 1 > 74) {
+                    setTimeout(() => setUploadProgress(i + 1), i * 400);
+                } else if (i + 1 > 49) {
+                    setTimeout(() => setUploadProgress(i + 1), i * 300);
+                } else if (i + 1 > 24) {
+                    setTimeout(() => setUploadProgress(i + 1), i * 200);
+                } else if (i + 1 > 14) {
+                    setTimeout(() => setUploadProgress(i + 1), i * 150);
+                } else {
+                    setTimeout(() => setUploadProgress(i + 1), i * 100);
+                }
+            });
+
+            const res = await axios.post(
+                `${apiUrl}${endpoints.CROP_PDF}`,
+                body,
+                config,
+            );
+            setUploadProgress(99);
+            setTimeout(() => {
+                setUploadProgress(100);
+            }, 1000);
+
+            const link = document.createElement("a");
+            link.href = res.data.zip;
+            link.setAttribute("download", "Converted Pdf");
+            link.click();
+
+            onConvertComplete();
+        } catch (error: any) {
+            toast.error(error.message);
+        }
     };
 
     const removeFileHandler = (id: any) => {
@@ -85,7 +131,6 @@ export default function splitPdf() {
                                 position: "absolute",
                                 top: -75,
                                 right: -25,
-                                // transform: "scaleX(-1)",
                             }}
                         />
                     </Box>
@@ -152,6 +197,7 @@ export default function splitPdf() {
                                                 (file: any) => {
                                                     const data = {
                                                         id: uuid(),
+                                                        data: file,
                                                         path: file.path,
                                                         lastModified:
                                                             file.lastModified,
@@ -219,7 +265,7 @@ export default function splitPdf() {
                                                     {t("REMOVE_ALL")}
                                                 </Button>
                                                 <Button
-                                                    onClick={() =>
+                                                    onClick={async () =>
                                                         convertFilesHandler()
                                                     }
                                                     variant="contained"

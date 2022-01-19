@@ -8,12 +8,10 @@ import { fData } from "src/utils/formatNumber";
 
 export default function FileUploadPreviewCard({
     file,
-    // convertFileHandler,
     removeFileHandler,
     url,
 }: {
     file: any;
-    // convertFileHandler: () => void;
     removeFileHandler: (id: any) => void;
     url: string;
 }) {

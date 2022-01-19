@@ -7,6 +7,9 @@
     "*"
   ],
   "scripts": {
-    "start": "forever start server/index.js && cd client && yarn start -p 3000"
+    "start": "forever start server/index.js && cd client && yarn start -p 3000",
+    "dev": "forever start server/index.js && cd client && yarn dev -p 3000",
+    "dc:prod": "docker-compose -f docker-compose.prod.yml up",
+    "dc:dev": "docker-compose -f docker-compose.dev.yml up"
   }
 }

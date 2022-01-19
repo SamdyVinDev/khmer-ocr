@@ -19,7 +19,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-app.use("/images", express.static("./images"));
+app.use("/images", express.static("server/images"));
+app.use("/zips", express.static("server/zips"));
 
 app.post("/api/v1/pdf-to-image", pdfToImage);
 app.post("/api/v1/pdf-to-word", pdfToWord);

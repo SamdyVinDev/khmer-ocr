@@ -20,7 +20,7 @@ const pdfToImage = async (req, res) => {
 
           const rename = uuid.v4() + fileType;
 
-          file.mv("./uploads/" + rename);
+          file.mv("server/uploads/" + rename);
 
           data.push({
             id: uuid.v4(),
@@ -35,7 +35,7 @@ const pdfToImage = async (req, res) => {
 
         const rename = uuid.v4() + fileType;
 
-        file.mv("./uploads/" + rename);
+        file.mv("server/uploads/" + rename);
 
         data.push({
           id: uuid.v4(),
@@ -49,7 +49,7 @@ const pdfToImage = async (req, res) => {
 
       data.forEach(async (file) => {
         os.execCommand(
-          `python3 machine_learning/detect.py --weights machine_learning/runs/train/yolov5s_results/weights/best.pt --img 512 --conf 0.4 --source './${file.path}' --save-crop --project 'images' --name '${file.id}'`
+          `python3 machine_learning/detect.py --weights machine_learning/runs/train/yolov5s_results/weights/best.pt --img 512 --conf 0.4 --source 'server/${file.path}' --save-crop --project 'server/images' --name '${file.id}'`
         )
           .then((result) => {
             finishedDetectFile += 1;
@@ -59,8 +59,10 @@ const pdfToImage = async (req, res) => {
 
             let length = 0;
 
-            if (fs.existsSync(`images/${file.id}/crops/line`)) {
-              length = fs.readdirSync(`images/${file.id}/crops/line`).length;
+            if (fs.existsSync(`server/images/${file.id}/crops/line`)) {
+              length = fs.readdirSync(
+                `server/images/${file.id}/crops/line`
+              ).length;
             }
 
             data[data.indexOf(file)].detected_cropped_images = [];
@@ -76,8 +78,18 @@ const pdfToImage = async (req, res) => {
             });
 
             if (finishedDetectFile === data.length) {
+              const imageFolders = data
+                .map((item) => `server/images/${item.id}`)
+                .join(" ");
+              const zipName = uuid.v4();
+
+              child_process.execSync(
+                `zip -r server/zips/${zipName}.zip ${imageFolders}`
+              );
+
               res.send({
                 status: true,
+                zip: `${apiUrl}/zips/${zipName}.zip`,
                 message: "Files are uploaded",
                 data: data,
               });

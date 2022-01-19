@@ -1,0 +1,9 @@
+version: "3"
+services:
+  app:
+    container_name: khmer_ocr_prod
+    build:
+      context: ./docker
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:3000
