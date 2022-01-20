@@ -15,7 +15,7 @@ function os_func() {
 }
 const os = new os_func();
 
-const apiUrl = "http://localhost:8000";
+const apiUrl = "http://137.184.249.83:8000";
 
 module.exports = {
   apiUrl,
