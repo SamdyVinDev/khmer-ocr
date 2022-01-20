@@ -52,16 +52,32 @@ export default function splitPdf() {
             };
 
             Array.from(Array(98)).forEach((_, i) => {
-                if (i + 1 > 74) {
-                    setTimeout(() => setUploadProgress(i + 1), i * 400);
-                } else if (i + 1 > 49) {
-                    setTimeout(() => setUploadProgress(i + 1), i * 300);
-                } else if (i + 1 > 24) {
-                    setTimeout(() => setUploadProgress(i + 1), i * 200);
-                } else if (i + 1 > 14) {
-                    setTimeout(() => setUploadProgress(i + 1), i * 150);
+                const newProgress = i + 1;
+                if (newProgress > 74) {
+                    setTimeout(
+                        () => setUploadProgress(newProgress),
+                        i * 400 * 3,
+                    );
+                } else if (newProgress > 49) {
+                    setTimeout(
+                        () => setUploadProgress(newProgress),
+                        i * 300 * 3,
+                    );
+                } else if (newProgress > 24) {
+                    setTimeout(
+                        () => setUploadProgress(newProgress),
+                        i * 200 * 3,
+                    );
+                } else if (newProgress > 14) {
+                    setTimeout(
+                        () => setUploadProgress(newProgress),
+                        i * 150 * 3,
+                    );
                 } else {
-                    setTimeout(() => setUploadProgress(i + 1), i * 100);
+                    setTimeout(
+                        () => setUploadProgress(newProgress),
+                        i * 100 * 3,
+                    );
                 }
             });
 
