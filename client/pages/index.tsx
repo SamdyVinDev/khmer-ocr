@@ -39,89 +39,164 @@ const Home = () => {
         url,
         logo,
         icon,
+        disabled,
     }: {
         label: string;
         desc: string;
         url: string;
         logo: string;
         icon: ReactNode;
+        disabled: boolean;
     }) => {
         return (
             <Grid item xs={12} sm={6} md={4}>
                 <MotionInView variants={varFadeInUp}>
-                    <Link href={url}>
-                        <a
-                            style={{
-                                textDecoration: "none",
+                    {disabled ? (
+                        <Paper
+                            elevation={6}
+                            sx={{
+                                border: "2px solid",
+                                height: "130px",
+                                borderColor: "background.paper",
+                                transition: "all 300ms ease-in-out",
+                                filter: "grayscale(1)",
+                                pointerEvents: "none",
                             }}
                         >
-                            <Paper
-                                elevation={6}
-                                sx={{
-                                    border: "2px solid",
-                                    height: "130px",
-                                    borderColor: "background.paper",
-                                    transition: "all 300ms ease-in-out",
-                                    "&:hover": {
-                                        borderColor: "primary.main",
-                                        cursor: "pointer",
-                                    },
-                                }}
+                            <Grid
+                                container
+                                padding={2}
+                                spacing={2}
+                                justifyContent="flex-start"
+                                alignItems="flex-start"
+                                wrap="wrap"
+                                direction={"row"}
+                                sx={{ height: "100%" }}
                             >
                                 <Grid
-                                    container
-                                    padding={2}
-                                    spacing={2}
-                                    justifyContent="flex-start"
-                                    alignItems="flex-start"
-                                    wrap="wrap"
-                                    direction={"row"}
-                                    sx={{ height: "100%" }}
+                                    item
+                                    xs={2}
+                                    sx={{
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        display: "flex",
+                                        fontSize: "70px",
+                                    }}
                                 >
-                                    <Grid
-                                        item
-                                        xs={2}
+                                    {icon}
+                                </Grid>
+                                <Grid item xs={10} sx={{ height: "100%" }}>
+                                    <Stack
                                         sx={{
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            display: "flex",
-                                            fontSize: "70px",
+                                            flex: 1,
+                                            justifyContent: "flex-start",
+                                            alignItems: "flex-start",
+                                            width: "100%",
+                                            height: "100%",
                                         }}
                                     >
-                                        {icon}
-                                    </Grid>
-                                    <Grid item xs={10} sx={{ height: "100%" }}>
-                                        <Stack
-                                            sx={{
-                                                flex: 1,
-                                                justifyContent: "flex-start",
-                                                alignItems: "flex-start",
-                                                width: "100%",
-                                                height: "100%",
+                                        <Typography variant="subtitle1">
+                                            {label}
+                                        </Typography>
+                                        <Typography
+                                            variant="caption"
+                                            color="GrayText"
+                                            style={{
+                                                overflow: "hidden",
+                                                textOverflow: "ellipsis",
+                                                display: "-webkit-box",
+                                                WebkitLineClamp: 3,
+                                                WebkitBoxOrient: "vertical",
                                             }}
                                         >
-                                            <Typography variant="subtitle1">
-                                                {label}
-                                            </Typography>
-                                            <Typography
-                                                variant="caption"
-                                                color="GrayText"
-                                                style={{
-                                                    overflow: "hidden",
-                                                    textOverflow: "ellipsis",
-                                                    display: "-webkit-box",
-                                                    WebkitLineClamp: 3,
-                                                    WebkitBoxOrient: "vertical",
+                                            {desc}
+                                        </Typography>
+                                    </Stack>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    ) : (
+                        <Link href={url}>
+                            <a
+                                style={{
+                                    textDecoration: "none",
+                                }}
+                            >
+                                <Paper
+                                    elevation={6}
+                                    sx={{
+                                        border: "2px solid",
+                                        height: "130px",
+                                        borderColor: "background.paper",
+                                        transition: "all 300ms ease-in-out",
+                                        "&:hover": {
+                                            borderColor: "primary.main",
+                                            cursor: "pointer",
+                                        },
+                                    }}
+                                >
+                                    <Grid
+                                        container
+                                        padding={2}
+                                        spacing={2}
+                                        justifyContent="flex-start"
+                                        alignItems="flex-start"
+                                        wrap="wrap"
+                                        direction={"row"}
+                                        sx={{ height: "100%" }}
+                                    >
+                                        <Grid
+                                            item
+                                            xs={2}
+                                            sx={{
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                display: "flex",
+                                                fontSize: "70px",
+                                            }}
+                                        >
+                                            {icon}
+                                        </Grid>
+                                        <Grid
+                                            item
+                                            xs={10}
+                                            sx={{ height: "100%" }}
+                                        >
+                                            <Stack
+                                                sx={{
+                                                    flex: 1,
+                                                    justifyContent:
+                                                        "flex-start",
+                                                    alignItems: "flex-start",
+                                                    width: "100%",
+                                                    height: "100%",
                                                 }}
                                             >
-                                                {desc}
-                                            </Typography>
-                                        </Stack>
+                                                <Typography variant="subtitle1">
+                                                    {label}
+                                                </Typography>
+                                                <Typography
+                                                    variant="caption"
+                                                    color="GrayText"
+                                                    style={{
+                                                        overflow: "hidden",
+                                                        textOverflow:
+                                                            "ellipsis",
+                                                        display: "-webkit-box",
+                                                        WebkitLineClamp: 3,
+                                                        WebkitBoxOrient:
+                                                            "vertical",
+                                                    }}
+                                                >
+                                                    {desc}
+                                                </Typography>
+                                            </Stack>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Paper>
-                        </a>
-                    </Link>
+                                </Paper>
+                            </a>
+                        </Link>
+                    )}
                 </MotionInView>
             </Grid>
         );
@@ -133,41 +208,17 @@ const Home = () => {
             icon={"favicon/logo.png"}
             headTitle="Khmer OCR"
         >
-            <Container maxWidth="sm">
+            <Container maxWidth="md">
                 <MotionInView variants={varFadeInRight}>
-                    <form onSubmit={onSearch}>
-                        <Stack direction={"row"} spacing={1}>
-                            <Autocomplete
-                                fullWidth
-                                id="search-for-pdf-tool"
-                                value={selectedPdfTool}
-                                onChange={(e: any, newValue: any) =>
-                                    setSelectedPdfTool(newValue)
-                                }
-                                isOptionEqualToValue={(option, value) =>
-                                    option.url === value
-                                }
-                                disableClearable
-                                options={navItems}
-                                getOptionLabel={(option: any) =>
-                                    t(option.label)
-                                }
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label={t("SEARCH_FOR_PDF_TOOLS")}
-                                        InputProps={{
-                                            ...params.InputProps,
-                                            type: "search",
-                                        }}
-                                    />
-                                )}
-                            />
-                            <Button variant="contained" type="submit">
-                                <Search />
-                            </Button>
-                        </Stack>
-                    </form>
+                    <Typography
+                        color="GrayText"
+                        sx={{ textAlign: "center", fontSize: "12px" }}
+                    >
+                        “Khmer OCR” is an Artificial Intelligence (AI) project
+                        using Deep Learning together with Computer Vision where
+                        we mainly focus on Khmer text recognition system joint
+                        by Text line Detection model and Text Recognition model.
+                    </Typography>
                 </MotionInView>
             </Container>
             <Container maxWidth="lg">

@@ -54,6 +54,7 @@ export const navItems = [
             kh: "ការច្រឹបគឺជាដំណើរការនៃការដកចេញផ្នែកនៃរូបថតដើម្បីបង្កើតការផ្តោតអារម្មណ៍ ... តម្រង់ឧបករណ៍ គូរបន្ទាត់យោងដើម្បីតម្រង់រូបថត។",
             ch: "裁剪是删除照片的一部分以创建焦点的过程... 拉直工具，绘制参考线以拉直照片。",
         },
+        disabled: false,
     },
     {
         id: "url-id#2",
@@ -71,6 +72,7 @@ export const navItems = [
             kh: "ពីរូបភាពទៅជាអត្ថបទ ងាយស្រួលបំប្លែងរូបថត រូបភាព រូបថតអេក្រង់ និងច្រើនទៀតទៅជាអត្ថបទ។ ស្រង់អត្ថបទពីរូបភាពគ្រប់ប្រភេទដោយប្រើកម្មវិធីបំប្លែងតាមអ៊ីនធឺណិតនេះ។",
             ch: "从图像到文本 - 将照片、图片、屏幕截图等轻松转换为文本。 使用此在线转换器从各种图像中提取文本",
         },
+        disabled: true,
     },
     {
         id: "url-id#3",
@@ -83,6 +85,7 @@ export const navItems = [
             kh: "ការទទួលស្គាល់អត្ថបទដោយមិនចាំបាច់ដំឡើងកម្មវិធី ឬទាញយក។ កម្មវិធីបំលែង OCR នេះអនុញ្ញាតឱ្យអ្នកបំប្លែងទៅជាទម្រង់ Microsoft Word DOC និង DOCX ។",
             ch: "无需软件安装或下载的文本识别。 此 OCR 转换器允许您转换为 Microsoft Word 格式的 DOC 和 DOCX。",
         },
+        disabled: true,
     },
 ];
 
@@ -147,16 +150,30 @@ export default function Navbar() {
                     </Stack>
                     <Divider sx={{ backgroundColor: "primary.main" }} />
                     <MenuList>
-                        {navItems.map((item) => (
-                            <Link href={item.url}>
+                        {navItems.map((item) =>
+                            item.disabled ? (
                                 <MenuItem
-                                    sx={{ py: 2 }}
-                                    onClick={() => setOpenMenu(false)}
+                                    sx={{
+                                        py: 2,
+                                        color: "gray",
+                                        pointerEvents: "none",
+                                    }}
                                 >
                                     <ListItemText>{t(item.label)}</ListItemText>
                                 </MenuItem>
-                            </Link>
-                        ))}
+                            ) : (
+                                <Link href={item.url}>
+                                    <MenuItem
+                                        sx={{ py: 2 }}
+                                        onClick={() => setOpenMenu(false)}
+                                    >
+                                        <ListItemText>
+                                            {t(item.label)}
+                                        </ListItemText>
+                                    </MenuItem>
+                                </Link>
+                            ),
+                        )}
                     </MenuList>
                 </Stack>
             </Drawer>

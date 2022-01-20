@@ -6,6 +6,7 @@ import {
 import ContentTitle from "@components/ContentTitle";
 import FileUploadPreviewCard from "@components/customs/PreviewCard";
 import UploadMultipleFiles from "@components/UploadMultipleFiles";
+import { FileDownload } from "@mui/icons-material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import axios, { AxiosRequestConfig } from "axios";
@@ -22,6 +23,7 @@ export default function splitPdf() {
     const [uploadProgress, setUploadProgress] = useState<any>(0);
     const [uploadStarted, setUploadStarted] = useState(false);
     const [uploadCompleted, setUploadCompleted] = useState(false);
+    const [downloadLink, setDownloadLink] = useState();
 
     const onConvertComplete = () => {
         const notifySound = new Audio("sounds/notify.mp3");
@@ -90,16 +92,30 @@ export default function splitPdf() {
             setTimeout(() => {
                 setUploadProgress(100);
             }, 1000);
-
-            const link = document.createElement("a");
-            link.href = res.data.zip;
-            link.setAttribute("download", "Converted Pdf");
-            link.click();
+            setDownloadLink(res.data.zip);
 
             onConvertComplete();
         } catch (error: any) {
             toast.error(error.message);
         }
+    };
+    const onDownloadZipHandler = async () => {
+        await axios({
+            url: downloadLink,
+            method: "GET",
+            responseType: "blob",
+        })
+            .then((response) => {
+                const url = window.URL.createObjectURL(
+                    new Blob([response.data]),
+                );
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", "converted_pdf.zip");
+                document.body.appendChild(link);
+                link.click();
+            })
+            .catch((error) => toast.error(error.message));
     };
 
     const removeFileHandler = (id: any) => {
@@ -177,13 +193,28 @@ export default function splitPdf() {
                                 sx={{ fontSize: "150px", color: "green" }}
                             />
                         </Box>
-                        <Button
-                            onClick={() => setUploadCompleted(false)}
-                            variant="contained"
-                            size="large"
-                        >
-                            {t("CONVERT_OTHER_FILES")}
-                        </Button>
+                        <Stack direction={"row"} spacing={2}>
+                            <Button
+                                onClick={() => {
+                                    setUploadCompleted(false);
+                                    setDownloadLink(undefined);
+                                }}
+                                variant="contained"
+                                size="large"
+                            >
+                                {t("CONVERT_OTHER_FILES")}
+                            </Button>
+                            <Button
+                                onClick={onDownloadZipHandler}
+                                startIcon={<FileDownload />}
+                                variant="contained"
+                                size="large"
+                                color="success"
+                                sx={{ color: "white" }}
+                            >
+                                {t("DOWNLOAD")}
+                            </Button>
+                        </Stack>
                     </Stack>
                 ) : (
                     <>
