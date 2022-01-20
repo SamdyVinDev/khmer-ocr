@@ -3,4 +3,4 @@ const PDF_TO_IMAGE = "/api/v1/pdf-crop";
 const PDF_TO_WORD = "/api/v1/pdf-crop";
 
 export default { CROP_PDF, PDF_TO_IMAGE, PDF_TO_WORD };
-export const apiUrl = "http://localhost:8000";
+export const apiUrl = "http://137.184.249.83:8000";
